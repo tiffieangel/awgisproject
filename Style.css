@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+}
+h1, h2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    text-align: center;
+}
+p {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.header {
+    background-color: #687d66;
+    height: 100px;
+    text-align: center;
+    color: black;
+    padding: 1px;
+}
+.container {
+    padding: 1%;
+    box-sizing: border-box;
+    min-height: 500px;
+}
+.left-col {
+    background-color: #f4f4f4;
+    width: 15%;
+    float: left;
+}
+#map {
+    height: 500px;
+    background: black;
+    margin: 10px
+}
+
+.footer {
+    clear: both;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #687d66;
+    text-align: center;
+    color: black;
+    height: 50px;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
