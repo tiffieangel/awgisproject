@@ -18,6 +18,8 @@
       nonce="e4ea24bce55cf81782f8f487ac06d48b"
       charset="UTF-8"
     ></script>
+  
+
   </head>
 
   <head>
@@ -32,7 +34,9 @@
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""
-    ></script>
+    ></script><script src="JS/catiline.js"></script>
+    <script src="JS/leaflet.shpfile.js"></script>
+
   </head>
 
   <body>
@@ -53,9 +57,24 @@
 
         <div id="map"></div>
 
+
+
         <script>
+
+ 
+
           let mymap = L.map("map").setView([51.505, -0.09], 3);
+
+          //the access token and api link are derived from mapbox styles-open to edit-share-third part-carto
+         //let accessToken = `pk.eyJ1IjoidGlmZmllLWFuZ2VsIiwiYSI6ImNrdXpkMnYxMzFjYTEyd3JmY242dnRoYXIifQ.tQzRdh68GCNO1gK7fwIHTw`;
+
           let accessToken = `pk.eyJ1IjoidGlmZmllLWFuZ2VsIiwiYSI6ImNrdXpkMnYxMzFjYTEyd3JmY242dnRoYXIifQ.tQzRdh68GCNO1gK7fwIHTw`;
+
+          //L.tileLayer(
+            //`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}`,
+            //{
+              //basemap above is satelitte
+
           L.tileLayer(
             `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}`,
             {
@@ -67,10 +86,32 @@
               zoomOffset: -1,
               accessToken: accessToken,
             }
+
+          // Mapp classification layers geojson
+
+
           ).addTo(mymap);
+
+          //from plugin code
+          var shpfile = new L.Shapefile('Data/2000.zip', {
+			onEachFeature: function(feature, layer) {
+				if (feature.properties) {
+					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+						return k + ": " + feature.properties[k];
+					}).join("<br />"), {
+						maxHeight: 200
+					});
+				}
+			}
+		});
+		shpfile.addTo(mymap);
+		shpfile.once("data:loaded", function() {
+			console.log("finished loaded shapefile");
+		});
+
         </script>
       </div>
     </div>
-    <div class="footer">&copy; Tamak</div>
+    <div class="footer">&copy; GeoInfinity</div>
   </body>
 </html>
