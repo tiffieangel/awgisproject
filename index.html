@@ -92,7 +92,7 @@
 
           ).addTo(mymap);
 
-          //from plugin code
+          //from plugin code (2000 shp)
           var shpfile = new L.Shapefile('Data/2000.zip', {
 			onEachFeature: function(feature, layer) {
 				if (feature.properties) {
@@ -108,6 +108,42 @@
 		shpfile.once("data:loaded", function() {
 			console.log("finished loaded shapefile");
 		});
+
+   
+       // 2010 shp
+      var shpfile = new L.Shapefile('Data/2010.zip', {
+        onEachFeature: function(feature, layer) {
+          if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+              return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+              maxHeight: 200
+            });
+          }
+        }
+      });
+      shpfile.addTo(mymap);
+      shpfile.once("data:loaded", function() {
+        console.log("finished loaded shapefile");
+      });
+
+      // 2020 shp
+      var shpfile = new L.Shapefile('Data/2020.zip', {
+			onEachFeature: function(feature, layer) {
+				if (feature.properties) {
+					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+						return k + ": " + feature.properties[k];
+					}).join("<br />"), {
+						maxHeight: 200
+					});
+				}
+			}
+		});
+		shpfile.addTo(mymap);
+		shpfile.once("data:loaded", function() {
+			console.log("finished loaded shapefile");
+		});
+
 
         </script>
       </div>
