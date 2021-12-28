@@ -87,13 +87,11 @@
               accessToken: accessToken,
             }
 
-          // Mapp classification layers geojson
-
 
           ).addTo(mymap);
 
-          //from plugin code (2000 shp)
-          var shpfile = new L.Shapefile('Data/2000.zip', {
+          //2000 shp (code from leaflet shapefile plugin. Linlked to catiline.js, leaflet.shpfile,js & shp.js)
+          var shpfile1 = new L.Shapefile('Data/2000a.zip', {
 			onEachFeature: function(feature, layer) {
 				if (feature.properties) {
 					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -104,14 +102,14 @@
 				}
 			}
 		});
-		shpfile.addTo(mymap);
-		shpfile.once("data:loaded", function() {
+		shpfile1.addTo(mymap);
+		shpfile1.once("data:loaded", function() {
 			console.log("finished loaded shapefile");
 		});
 
    
        // 2010 shp
-      var shpfile = new L.Shapefile('Data/2010.zip', {
+      var shpfile2 = new L.Shapefile('Data/2010a.zip', {
         onEachFeature: function(feature, layer) {
           if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -122,13 +120,13 @@
           }
         }
       });
-      shpfile.addTo(mymap);
-      shpfile.once("data:loaded", function() {
+      shpfile2.addTo(mymap);
+      shpfile2.once("data:loaded", function() {
         console.log("finished loaded shapefile");
       });
 
       // 2020 shp
-      var shpfile = new L.Shapefile('Data/2020.zip', {
+      var shpfile3 = new L.Shapefile('Data/2020.zip', {
 			onEachFeature: function(feature, layer) {
 				if (feature.properties) {
 					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -139,10 +137,26 @@
 				}
 			}
 		});
-		shpfile.addTo(mymap);
-		shpfile.once("data:loaded", function() {
+		shpfile3.addTo(mymap);
+		shpfile3.once("data:loaded", function() {
 			console.log("finished loaded shapefile");
 		});
+
+
+// layer controls
+let baseLayers = {
+    "Satelite": mymap,
+};
+
+let overlays = {
+    "2000": shpfile1,
+    "2010": shpfile2,
+    "2020": shpfile3
+};
+
+L.control.layers(baseLayers, overlays).addTo(mymap);
+
+
 
 
         </script>
